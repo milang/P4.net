@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Library>
+  <Namespace name="P4API">
+    <Forms>
+      <remarks>
+        Forms are the things that pop-up in an editor when run from a command line.  In
+        P4.Net (and most other Perforce APIs), you do not need to parse/format the text manually.
+        Instead, you can get/set the fields using the Fields and ArrayFields collections.
+        <P>The following is a list of common form commands:</P>
+        <list>
+          <li>client</li>
+          <li>branch</li>
+          <li>label</li>
+          <li>job</li>
+          <li>user</li>
+          <li>group</li>
+          <li>protect</li>
+          <li>triggers</li>
+          <li>branch</li>
+        </list>
+        <P>
+          When fetching or saving a form, <B>do not use the '-o' and '-i' flags</B>.  P4.Net will automatically include them.
+        </P>
+      </remarks>
+      <example>
+        The following example updates the current client.  It changes the client root, and adds a line to the view.
+        <code language="C#" escaped="true">
+          P4Connection p4 = new P4Connection();
+          p4.Connect();
+
+          P4Form MyClient = p4.Fetch_Form("client");
+
+          //Change the root and properties
+          MyClient["Root"] = @"C:\p4\P4.NetClient";
+          MyClient["Description"] = "Created from P4.Net!";
+
+          //Fetch the clientName (for use later in building the view spec).
+          string clientName = MyClient["Client"];
+
+          // Build a new array, that has one more element than the current view
+          string[] NewView = new string[MyClient.ArrayFields["View"].Length + 1];
+
+          // Copy the existing view lines to the new array
+          MyClient.ArrayFields["View"].CopyTo(NewView,0);
+
+          // Set the new view line
+          NewView[NewView.Length - 1] = string.Format("//depot/newpath/... //{0}/newpath/...", clientName);
+
+          MyClient.ArrayFields["View"] = NewView;
+
+          // Save the form
+          P4UnParsedRecordSet MyResult = p4.Save_Form(MyClient);
+          p4.Disconnect();
+        </code>
+      </example>
+    </Forms>
+    <P4Connection>
+      <remarks>
+        <p>
+          The P4Connection class is the main player in P4.Net. This represents a connection
+          to the Perforce server. Every utility that uses P4.Net will have some variation
+          of the following code:
+        </p>
+          <code language="C#" escaped="true">
+P4Connection p4 = new P4Connection();
+p4.Connect();
+
+// Run some commands
+p4.Disconnect();</code>
+        <p>
+          Rule number 1: Always remember to disconnect. This frees unmanaged memory, and cleanly
+          disconnects from the Perforce server. P4Connection implements IDisposable, and the
+          Dispose and Disconnect methods can be used interchangeably.
+        </p>
+        <p>
+          P4.Net is based off the command-line syntax (as are most other Perforce APIs). Almost
+          all of the commands you issue in P4.Net will use the same arguments as the p4 client
+          executable. For example, say you need to find the latest submitted changelist under
+          a given path (//depot/path).
+        </p>
+        <para>From the command line:</para>
+          <code language="C#">
+c:\&gt; p4 changes -m1 -s submitted //depot/path/...</code>
+        <para>From P4.Net:</para>
+          <code language="C#" escaped="true">
+P4Connect p4 = new P4Connection();
+p4.Connect();
+P4Recordset changes = p4.Run("changes", "-m1", "-s", "submitted", "//depot/path/...");
+p4.Disconnect();</code>
+        <p>
+          If you don’t know what all the arguments for p4 changes mean, then <c>p4 help changes</c>
+          is your best friend. The first step in building anything with P4.Net, is to know
+          the exact command lines you’d run manually.
+        </p>
+      </remarks>
+    </P4Connection>
+    <OnPrompt>
+      <example>
+        The following sample will change the user's password.
+        <code language="C#" escaped="true">
+public class PasswordSetter
+{
+    private P4Connection _p4 = null;
+    private string _oldPassword = "";
+    private string _newPassword = "";
+    PasswordSetter(P4Connection p4)
+    {
+        _p4 = p4;
+    }
+
+    public void SetPassword(string OldPassword, string NewPassword)
+    {
+        OnPromptEventHandler eh = new OnPromptEventHandler(OnPrompt);
+        _p4.OnPrompt += eh;
+
+        _oldPassword = OldPassword;
+        _newPassword = NewPassword;
+
+        //run passwd
+        P4UnParsedRecordSet r = _p4.RunUnParsed("passwd");
+
+        //Clear the event just in case
+        _p4.OnPrompt -= eh;
+
+        //Clear the passwords from memory
+        _newPassword = "";
+        _oldPassword = "";
+    }
+
+    private void OnPrompt(object sender, P4PromptEventArgs e)
+    {
+        switch (e.Message)
+        {
+            case ("Enter old password: "):
+                e.Response = _oldPassword;
+                break;
+            case ("Enter new password: "):
+                e.Response = _newPassword;
+                break;
+            case ("Re-enter new password: "):
+                e.Response = _newPassword;
+                break;
+        }
+    }
+} 
+        </code>
+      </example>
+    </OnPrompt>
+    <Changelist>
+      <remarks>
+        The P4PendindingChangelist object is used to submit files with P4.Net.  The first step
+        is to create a new pending changelist, then add the switches "-c", and "1234" 
+        (1234 is the changelist number) to all commands that are opening files.
+
+        In P4.Net, there’s no straight-forward way to submit the default pending changelist.
+        This is by design. If the client workspace has opened files in the default changelist
+        before any P4.Net automation runs, those files will "come along for the ride" when
+        you submit the default changelist. If the user has a JobView set, all jobs in that
+        JobView will automatically be fixed when you submit the default changelist.
+        Both of those behaviors are almost never desired, and I’ve found many scripts that
+        have those bugs.
+      </remarks>
+      <example>
+        The following example demonstrates submiting files with P4PendingChangelist.
+        <code language="C#" escaped="true">
+P4Connection p4 = new P4Connection();
+p4.Connect();
+P4PendingChangelist  cl = p4.CreatePendingChangelist("My New Changelist\nVery, Very bad description!\nShame on me!");
+p4.Run("edit", "-c", cl.Number.ToString(), "//depot/path/foo.cs", "//depot/path/bar.cs");
+// Do something to manipulate the files
+cl.Submit();
+p4.Disconnect();
+      </code>
+</example>
+    </Changelist>
+  
+  </Namespace>
+</Library>

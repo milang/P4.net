@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="P4API.P4Connection">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4Connection.cs</FileName>
+      <HashCode>AAQNAAAARCIhAKAAKAAAQNAADAEVSEACEABQEwBCGAY=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_CallingProgram" Hidden="true" />
+      <Field Name="_CallingProgramVersion" Hidden="true" />
+      <Field Name="_Charset" Hidden="true" />
+      <Field Name="_Client" Hidden="true" />
+      <Property Name="_ClientAPI" Hidden="true" />
+      <Field Name="_CWD" Hidden="true" />
+      <Field Name="_exceptionLevel" Hidden="true" />
+      <Field Name="_Host" Hidden="true" />
+      <Field Name="_Initialized" Hidden="true" />
+      <Field Name="_offset" Hidden="true" />
+      <Field Name="_p4epoch" Hidden="true" />
+      <Field Name="_Port" Hidden="true" />
+      <Field Name="_tagged" Hidden="true" />
+      <Property Name="_TimeOffset" Hidden="true" />
+      <Field Name="_timespanSet" Hidden="true" />
+      <Field Name="_User" Hidden="true" />
+      <Method Name="CloseConnection" Hidden="true" />
+      <Method Name="EstablishConnection" Hidden="true" />
+      <Method Name="HandleOnPrompt" Hidden="true" />
+      <Field Name="m_ClientApi" Hidden="true" />
+      <Method Name="RaiseOnPromptEvent" Hidden="true" />
+      <Method Name="RunIt" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Delegate Name="P4API.P4Connection.OnPromptEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>P4Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Enum Name="P4API.P4Connection.ExceptionLevels" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>P4Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="P4API.P4BaseRecordSet">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4BaseRecordSet.cs</FileName>
+      <HashCode>AXAAAMEAAAAAgQGAIAECAAAAAIEAAAAKAEQQAIAgEAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_InputText" Hidden="true" />
+      <Field Name="_SpecDef" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Delegate Name="P4API.P4BaseRecordSet.OnPromptEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>P4BaseRecordSet.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+  </Class>
+  <Class Name="P4API.P4RecordSet">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4RecordSet.cs</FileName>
+      <HashCode>IAAAAAAAAAAAAAQACAAAAAAABAAAAAAEAAAAAQAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Property Name="_Results" Hidden="true" />
+      <Method Name="IEnumerable.GetEnumerator" Hidden="true" />
+      <Field Name="m_results" Hidden="true" />
+      <Method Name="P4RecordSet" Hidden="true" />
+    </Members>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="P4API.P4UnParsedRecordSet">
+    <Position X="4.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4UnParsedRecordSet.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAIAAEAEAAAAAQAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Property Name="_Outputs" Hidden="true" />
+      <Method Name="IEnumerable.GetEnumerator" Hidden="true" />
+      <Field Name="m_outputs" Hidden="true" />
+    </Members>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="P4API.P4Form">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4Form.cs</FileName>
+      <HashCode>AAAIAAAAAAAAAAAAAAkAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_specdef" Hidden="true" />
+      <Field Name="m_FormCommand" Hidden="true" />
+      <Method Name="P4Form" Hidden="true" />
+    </Members>
+  </Class>
+  <Class Name="P4API.P4ResultClientUser">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4ResultClientUser.cs</FileName>
+      <HashCode>EEACAAAAAAAAAIAAQAQAACAAAAAAAIIAAAAAIAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="P4API.P4Record">
+    <Position X="6.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4Record.cs</FileName>
+      <HashCode>AAAAAAAAAAABAAAACAACAAAAQAAAAAAAAACAAAAAgAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_ArrayFields" Hidden="true" />
+      <Field Name="_Fields" Hidden="true" />
+      <Property Name="AllFieldDictionary" Hidden="true" />
+    </Members>
+  </Class>
+  <Class Name="P4API.P4PendingChangelist">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>P4PendingChangelist.cs</FileName>
+      <HashCode>KAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_p4" Hidden="true" />
+      <Field Name="baseForm" Hidden="true" />
+      <Method Name="P4PendingChangelist" Hidden="true" />
+    </Members>
+  </Class>
+</ClassDiagram>

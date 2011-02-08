@@ -1,0 +1,68 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4706B526-42F0-420E-9CF2-B0AB775C8E47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>P4API</RootNamespace>
+    <AssemblyName>P4API</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\..\bin\$(Configuration)</OutputPath>
+    <DocumentationFile>..\..\bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CallbackClientUser.cs" />
+    <Compile Include="P4Integration.cs" />
+    <Compile Include="P4Map.cs" />
+    <Compile Include="P4RecordsetCallback.cs" />
+    <Compile Include="ExceptionLevels.cs" />
+    <Compile Include="Exceptions\P4APIExceptions.cs" />
+    <Compile Include="MergeData.cs" />
+    <Compile Include="P4Callback.cs" />
+    <Compile Include="P4Connection.cs" />
+    <Compile Include="P4Form.cs" />
+    <Compile Include="P4BaseRecordSet.cs" />
+    <Compile Include="P4FormRecordSet.cs" />
+    <Compile Include="P4Message.cs" />
+    <Compile Include="P4PendingChangelist.cs" />
+    <Compile Include="P4PrintCallback.cs" />
+    <Compile Include="P4PrintStreamEventArgs.cs" />
+    <Compile Include="P4PromptEventArgs.cs" />
+    <Compile Include="P4Revision.cs" />
+    <Compile Include="P4UnParsedRecordSet.cs" />
+    <Compile Include="P4RecordSet.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="P4Record.cs" />
+    <Compile Include="PrintStreamHelper.cs" />
+    <Compile Include="Record\ArrayFieldDictionary.cs" />
+    <Compile Include="Record\FieldDictionary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <Content Include="CodeDocuments.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

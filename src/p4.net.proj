@@ -1,0 +1,31 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+    <!--
+
+    Delete all non-source-controlled files. This includes
+    files created by build as well as files created by
+    Visual Studio IDE/ReSharper. -->
+    <Target Name="Clobber">
+        <ItemGroup>
+            <FilesToDelete Include="*.suo" />
+            <FilesToDelete Include="*.sdf" />
+            <FilesToDelete Include="**/*.user" />
+            <FilesToDelete Include="**/*.local" />
+            <BuildDirs Include="*/*proj" />
+            <DirectoriesToDelete Include="../bin" Condition=" exists('../bin') " />
+            <DirectoriesToDelete Include="_ReSharper.p4.net" Condition=" exists('_ReSharper.p4.net') " />
+            <DirectoriesToDelete Include="%(BuildDirs.RelativeDir)obj" Condition=" Exists('%(BuildDirs.RelativeDir)obj') " />
+        </ItemGroup>
+        <Delete Files="@(FilesToDelete)" />
+        <RemoveDir Directories="@(DirectoriesToDelete)" />
+    </Target>
+    <!--
+
+    Build all P4.NET projects incrementally
+    (only out-of-date files will be compiled/linked). -->
+    <Target Name="Build">
+        <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Debug;Platform=Win32" Targets="Build" />
+        <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Debug;Platform=x64" Targets="Build" />
+        <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=Win32" Targets="Build" />
+        <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=x64" Targets="Build" />
+    </Target>
+</Project>

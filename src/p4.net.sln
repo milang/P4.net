@@ -3,16 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "p4dn", "p4dn\p4dn.vcxproj", "{9544C473-8276-46E0-B252-0576527DBE68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4API", "P4API\P4API.csproj", "{4706B526-42F0-420E-9CF2-B0AB775C8E47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
-		Release|Win32 = Release|Win32
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9544C473-8276-46E0-B252-0576527DBE68}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9544C473-8276-46E0-B252-0576527DBE68}.Debug|Win32.Build.0 = Debug|Win32
-		{9544C473-8276-46E0-B252-0576527DBE68}.Release|Win32.ActiveCfg = Release|Win32
-		{9544C473-8276-46E0-B252-0576527DBE68}.Release|Win32.Build.0 = Release|Win32
+		{9544C473-8276-46E0-B252-0576527DBE68}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{9544C473-8276-46E0-B252-0576527DBE68}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{9544C473-8276-46E0-B252-0576527DBE68}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{9544C473-8276-46E0-B252-0576527DBE68}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{4706B526-42F0-420E-9CF2-B0AB775C8E47}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4706B526-42F0-420E-9CF2-B0AB775C8E47}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4706B526-42F0-420E-9CF2-B0AB775C8E47}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4706B526-42F0-420E-9CF2-B0AB775C8E47}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

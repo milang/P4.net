@@ -191,6 +191,7 @@ namespace P4API
             return list;
         }
 
+        /*
         private List<List<string>> parseList2(string baseName, Dictionary<string, string> sd)
         {
             List<List<string>> list = new List<List<string>>();
@@ -211,6 +212,7 @@ namespace P4API
             }
             return list;
         }
+        */
 
         private void processArray(string baseName)
         {

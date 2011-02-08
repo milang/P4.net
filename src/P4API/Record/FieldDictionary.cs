@@ -19,9 +19,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
  */
 
 
-using System;
 using System.Collections;
-using System.Text;
 
 namespace P4API
 {
@@ -30,7 +28,7 @@ namespace P4API
     /// </summary>
     /// <remarks>
     /// The FieldDictionary only contains fields that contain a single string value.  Fields that return array
-    /// values are stored in <paramref name="ArrayFieldDictionary"/>.
+    /// values are stored in <see cref="ArrayFieldDictionary"/>.
     /// </remarks>
     public class FieldDictionary
     {

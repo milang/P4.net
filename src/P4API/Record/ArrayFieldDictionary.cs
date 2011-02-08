@@ -19,9 +19,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
  */
 
 
-using System;
 using System.Collections;
-using System.Text;
 
 namespace P4API
 {
@@ -30,7 +28,7 @@ namespace P4API
     /// </summary>
     /// <remarks>
     /// The FieldDictionary only contains fields that contain a string array values.  Fields that return a single string
-    /// values are stored in <paramref name="FieldDictionary"/>.<br/>
+    /// values are stored in <see cref="FieldDictionary"/>.<br/>
     /// If a value is read from a key that does not exist, an empty array will be returned.
     /// If a value is set with a key that does not exist, it will automatically be added.
     /// This behavior is to support many Perforce commands that omit a key, rather than supply a default value.

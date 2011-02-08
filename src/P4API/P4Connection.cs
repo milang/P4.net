@@ -21,7 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 using System;
 using System.Text;
 using p4dn;
-using System.Diagnostics;
 using P4API.Exceptions;
 using System.IO;
 using System.Collections.Generic;
@@ -107,7 +106,7 @@ namespace P4API
 
         #region Contructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:P4Connection"/> class.
+        /// Initializes a new instance of the P4Connection class.
         /// </summary>
         public P4Connection()
         {
@@ -424,9 +423,10 @@ namespace P4API
         /// <summary>
         /// Gets/Sets the Exception level when running Perforce commands.
         /// </summary>
-        /// <remarks><para>This property controls when P4.Net will throw exceptions
+        /// <remarks>
+        /// <para>This property controls when P4.Net will throw exceptions
         /// when the underlying Perforce commands raise errors and warnings.</para>
-        /// <para>The default is <paramref name="P4ExceptionLevels.NoExceptionOnWarnings"/></para></remarks>
+        /// <para>The default is NoExceptionOnWarnings</para></remarks>
         /// <value>The exception level for the connection.</value>
         public P4ExceptionLevels ExceptionLevel
         {

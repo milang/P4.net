@@ -45,7 +45,7 @@ System::String^ P4String::CharArrToString(const char* buffer, System::Text::Enco
 	}
 	else
 	{
-		return gcnew System::String(buffer, 0, strlen(buffer), encoding);
+		return gcnew System::String(buffer, 0, (int)strlen(buffer), encoding);
 	}
 }
 

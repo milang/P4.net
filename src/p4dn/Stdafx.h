@@ -56,7 +56,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #using <mscorlib.dll>
 #using <System.dll>
 
+#pragma warning (push)
+#pragma warning (disable: 4267 4244) // perforce includes generate some warnings in Visual Studio (x64 target platform), let's disable them temporarily
 #include "clientapi.h"
+#pragma warning (pop)
 #define const_char const char
 
 #include "spec.h"
@@ -64,4 +67,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include "P4String.h"
 #include "Errornum.h"
 #include "MergeData_m.h"
-

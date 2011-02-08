@@ -1,0 +1,20 @@
+#
+# For Linux 2.6: export OSVER=26  (or the appropriate number for your system)
+#
+EXEC = . ;
+P4LIBS = $(DOTDOT)$(SLASH)lib ;
+
+if $(OS) = NT {
+	JAMSHELL = cmd.exe /c ;
+}
+
+SubDir P4 ;
+SubDirHdrs $(P4) $(DOTDOT)$(SLASH)include$(SLASH)p4 ;
+
+Main samplemain : samplemain.cc ;
+
+LinkLibraries samplemain : 
+	$(P4LIBS)$(SLASH)$(CLIENTLIB) 
+	$(P4LIBS)$(SLASH)$(RPCLIB) 
+	$(P4LIBS)$(SLASH)$(SUPPORTLIB) 
+	;

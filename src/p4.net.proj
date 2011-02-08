@@ -27,5 +27,7 @@
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Debug;Platform=x64" Targets="Build" />
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=Win32" Targets="Build" />
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=x64" Targets="Build" />
+        <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Debug;Platform=AnyCPU" Targets="Build" />
+        <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Release;Platform=AnyCPU" Targets="Build" />
     </Target>
 </Project>

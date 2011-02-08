@@ -15,6 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <OutputPath>..\..\bin\$(Configuration)</OutputPath>
     <DocumentationFile>..\..\bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+    <ReferencePath>..\..\bin\Debug_Win32</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,11 +34,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <ProjectReference Include="..\p4dn\p4dn.vcxproj">
-      <Project>{9544C473-8276-46E0-B252-0576527DBE68}</Project>
-      <Name>p4dn</Name>
+    <Reference Include="p4dn">
       <Private>false</Private>
-    </ProjectReference>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallbackClientUser.cs" />

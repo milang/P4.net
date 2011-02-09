@@ -39,6 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="CallbackClientUser.cs" />
     <Compile Include="P4Integration.cs" />
     <Compile Include="P4Map.cs" />
@@ -65,6 +66,18 @@
     <Compile Include="Record\ArrayFieldDictionary.cs" />
     <Compile Include="Record\FieldDictionary.cs" />
     <None Include="ClassDiagram1.cd" />
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_Win32\p4dn.dll">
+      <Link>Bootstrapper.x86\p4dn.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_Win32\p4dn.pdb">
+      <Link>Bootstrapper.x86\p4dn.pdb</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_x64\p4dn.dll">
+      <Link>Bootstrapper.AMD64\p4dn.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_x64\p4dn.pdb">
+      <Link>Bootstrapper.AMD64\p4dn.pdb</Link>
+    </EmbeddedResource>
     <Content Include="CodeDocuments.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

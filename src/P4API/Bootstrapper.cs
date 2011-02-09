@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -69,8 +70,7 @@ namespace P4API
                                     "P4.NET"));
                             var architecture = (Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") ?? "x86").ToLowerInvariant();
                             var thisAssembly = typeof(Bootstrapper).Assembly;
-                            var thisAssemblyName = thisAssembly.GetName();
-                            var thisAssemblyVersion = thisAssemblyName.Version.ToString(4);
+                            var thisAssemblyFileVersion = FileVersionInfo.GetVersionInfo(thisAssembly.Location).FileVersion;
                             var targetFileName = Path.Combine(
                                 targetDirectory,
                                 string.Concat(
@@ -78,7 +78,7 @@ namespace P4API
                                     ".",
                                     BuildSpec,
                                     ".",
-                                    thisAssemblyVersion,
+                                    thisAssemblyFileVersion,
                                     ".",
                                     architecture,
                                     ".",
@@ -88,7 +88,7 @@ namespace P4API
                             // if needed (target file does not exist or older than this assembly),
                             // extract embedded resources to target directory now
                             var targetFileInfo = new FileInfo(targetFileName);
-                            if (!targetFileInfo.Exists || new FileInfo(new Uri(thisAssemblyName.CodeBase).AbsolutePath).LastWriteTimeUtc > targetFileInfo.LastWriteTimeUtc)
+                            if (!targetFileInfo.Exists)
                             {
                                 if (!Directory.Exists(targetDirectory))
                                 {
@@ -108,7 +108,7 @@ namespace P4API
                                                 .Substring(bootstrapperPrefix.Length)
                                                 .Replace(@"framework", ClrSpec)
                                                 .Replace(@"build", BuildSpec)
-                                                .Replace(@"version", thisAssemblyVersion));
+                                                .Replace(@"version", thisAssemblyFileVersion));
                                         using (var readStream = thisAssembly.GetManifestResourceStream(resourceName))
                                         {
                                             if (null == readStream) { throw new InvalidOperationException("Unable to GetManifestResourceStream for one of Assembly.GetManifestResourceNames values"); }

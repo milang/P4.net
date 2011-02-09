@@ -23,5 +23,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 using namespace System::Reflection;
 using namespace System::Runtime::CompilerServices;
 
-[assembly:AssemblyKeyFileAttribute("../p4.net.snk")];
-[assembly:AssemblyDelaySignAttribute(true)];
+//[assembly:AssemblyKeyFileAttribute("../p4.net.snk")];
+//[assembly:AssemblyDelaySignAttribute(false)];

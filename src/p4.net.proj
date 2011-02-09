@@ -23,10 +23,21 @@
     Build all P4.NET projects incrementally
     (only out-of-date files will be compiled/linked). -->
     <Target Name="Build">
+        <ItemGroup>
+            <Sn Include="$(WindowsSdkDir1)/Bin/sn.ex?" />
+            <Sn Include="$(ProgramFiles(x86))/Microsoft SDKs/Windows/v7.0A/Bin/sn.ex?" />
+            <Sn Include="$(ProgramFiles)/Microsoft SDKs/Windows/v7.0A/Bin/sn.ex?" />
+        </ItemGroup>
+        <Error Condition=" '@(Sn)' == '' " Text="Unable to find strong name tool (sn.exe)" />
+
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Debug;Platform=Win32" Targets="Build" />
+        <Exec Command="&quot;@(Sn)&quot; -q -R p4dn.dll ../../src/p4.net.snk" WorkingDirectory="../bin/Debug_Win32" />
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Debug;Platform=x64" Targets="Build" />
+        <Exec Command="&quot;@(Sn)&quot; -q -R p4dn.dll ../../src/p4.net.snk" WorkingDirectory="../bin/Debug_x64" />
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=Win32" Targets="Build" />
+        <Exec Command="&quot;@(Sn)&quot; -q -R p4dn.dll ../../src/p4.net.snk" WorkingDirectory="../bin/Release_Win32" />
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=x64" Targets="Build" />
+        <Exec Command="&quot;@(Sn)&quot; -q -R p4dn.dll ../../src/p4.net.snk" WorkingDirectory="../bin/Release_x64" />
         <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Debug;Platform=AnyCPU" Targets="Build" />
         <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Release;Platform=AnyCPU" Targets="Build" />
     </Target>

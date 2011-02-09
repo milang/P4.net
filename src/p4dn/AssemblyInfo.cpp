@@ -34,7 +34,7 @@ using namespace System::Runtime::CompilerServices;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
 [assembly:AssemblyProductAttribute("P4.Net")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) 2007 Shawn Hladky")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) 2007-2011 Shawn Hladky")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
@@ -49,7 +49,8 @@ using namespace System::Runtime::CompilerServices;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("1.0.0")];
+[assembly:AssemblyVersionAttribute("2.0.0.0")];
+[assembly:AssemblyFileVersionAttribute("2.0.0.1")];
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the

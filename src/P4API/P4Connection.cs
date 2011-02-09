@@ -49,6 +49,16 @@ namespace P4API
     public class P4Connection : IDisposable
     {
 
+        /// <summary>
+        /// Static constructor makes sure custom assembly
+        /// resolver (Bootstrapper) is registered.
+        /// </summary>
+        static P4Connection()
+        {
+            Bootstrapper.Initialize();
+        }
+
+
         #region Private Variables
         private ClientApi m_ClientApi;
         private bool _tagged = true;

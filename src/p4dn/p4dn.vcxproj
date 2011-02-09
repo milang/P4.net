@@ -64,6 +64,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <KeyFile>../p4.net.snk</KeyFile>
+      <DelaySign>true</DelaySign>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
@@ -74,6 +76,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <KeyFile>../p4.net.snk</KeyFile>
+      <DelaySign>true</DelaySign>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

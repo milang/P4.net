@@ -1,7 +1,7 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace P4API
 {
@@ -12,9 +12,9 @@ namespace P4API
     public static class Bootstrapper
     {
 
-        /**************************************************
-        /* Public interface
-        /**************************************************/
+        //**************************************************
+        //* Public interface
+        //**************************************************
 
         //-------------------------------------------------
         /// <summary>
@@ -33,25 +33,17 @@ namespace P4API
         /// </remarks>
         public static void Initialize()
         {
-            if (!Bootstrapper._initialized) // CLR guarantees proper access to volatile bool by multiple threads
+            if (0 == Interlocked.CompareExchange(ref Bootstrapper._initialized, 1, 0))
             {
-                lock (Bootstrapper.Sync)
-                {
-                    if (!Bootstrapper._initialized) // just to be sure, recheck the flag value after the memory barrier issued by the lock above
-                    {
-                        AppDomain.CurrentDomain.AssemblyResolve += CustomResolve;
-                        _initialized = true;
-                    }
-                }
+                AppDomain.CurrentDomain.AssemblyResolve += CustomResolve;
             }
         }
 
 
 
-
-        /**************************************************
-        /* Private
-        /**************************************************/
+        //**************************************************
+        //* Private
+        //**************************************************
 
         //-------------------------------------------------
         /// <summary>
@@ -61,8 +53,6 @@ namespace P4API
         private static Assembly CustomResolve(object sender, System.ResolveEventArgs args)
         {
             const string p4DnName = "p4dn";
-            const string categoryError = "P4.NET resolver error";
-
             if (null != args && null != args.Name && args.Name.StartsWith(p4DnName, StringComparison.OrdinalIgnoreCase))
             {
                 if (null == Bootstrapper._p4DnAssembly) // CLR guarantees proper access to volatile reference by multiple threads
@@ -71,73 +61,63 @@ namespace P4API
                     {
                         if (null == Bootstrapper._p4DnAssembly) // just to be sure, recheck the assembly reference after the memory barrier issued by the lock above
                         {
-                            // directory for embedded assembly extraction must exist
+                            // determine target assembly name
                             var targetDirectory = Path.Combine(
                                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
                                 Path.Combine(
                                     "Perforce",
                                     "P4.NET"));
-                            if (!Directory.Exists(targetDirectory))
-                            {
-                                Directory.CreateDirectory(targetDirectory);
-                            }
-
-                            // is extraction needed? (or is a fresh copy in the target directory already?)
                             var architecture = (Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") ?? "x86").ToLowerInvariant();
                             var thisAssembly = typeof(Bootstrapper).Assembly;
                             var thisAssemblyName = thisAssembly.GetName();
+                            var thisAssemblyVersion = thisAssemblyName.Version.ToString(4);
                             var targetFileName = Path.Combine(
                                 targetDirectory,
                                 string.Concat(
-                                    p4DnName,
-                                    "_",
-                                    thisAssemblyName.Version.ToString(4),
-                                    "_",
+                                    thisAssemblyVersion,
+                                    ".",
                                     architecture,
+                                    ".",
+                                    p4DnName,
                                     ".dll"));
-                            bool extractionNeeded;
-                            var targetFileInfo = new FileInfo(targetFileName);
-                            if (targetFileInfo.Exists) // if file exists, extract if target file is older than this assembly; if no file found, extract always
-                            {
-                                var thisAssemblyFileInfo = new FileInfo(new Uri(thisAssemblyName.CodeBase).AbsolutePath);
-                                extractionNeeded = (thisAssemblyFileInfo.LastWriteTimeUtc > targetFileInfo.LastWriteTimeUtc);
-                            }
-                            else
-                            {
-                                extractionNeeded = true;
-                            }
 
-                            // extract now (unless the target file is fresh)
-                            if (extractionNeeded)
+                            // if needed (target file does not exist or older than this assembly),
+                            // extract embedded resources to target directory now
+                            var targetFileInfo = new FileInfo(targetFileName);
+                            if (!targetFileInfo.Exists || new FileInfo(new Uri(thisAssemblyName.CodeBase).AbsolutePath).LastWriteTimeUtc > targetFileInfo.LastWriteTimeUtc)
                             {
-                                var resourceName = string.Concat(
-                                    typeof(Bootstrapper).FullName,
-                                    ".",
-                                    architecture,
-                                    ".",
-                                    p4DnName,
-                                    ".dll");
+                                if (!Directory.Exists(targetDirectory))
+                                {
+                                    Directory.CreateDirectory(targetDirectory);
+                                }
+
                                 const int bufferSize = 0x10000; // 64k
                                 var buffer = new byte[bufferSize];
-                                using (var readStream = thisAssembly.GetManifestResourceStream(resourceName))
+                                foreach (var resourceName in thisAssembly.GetManifestResourceNames())
                                 {
-                                    if (null == readStream)
+                                    const string bootstrapperPrefix = @"P4API.Bootstrapper.";
+                                    if (resourceName.StartsWith(bootstrapperPrefix, StringComparison.OrdinalIgnoreCase))
                                     {
-                                        Trace.WriteLine(string.Concat("No embedded resource \"", resourceName, "\" found, your architecture is probably not supported"), categoryError);
-                                        return null;
-                                    }
-                                    using (var writeStream = File.Create(targetFileName, bufferSize))
-                                    {
-                                        int read;
-                                        while (0 != (read = readStream.Read(buffer, 0, bufferSize)))
+                                        var extractName = Path.Combine(
+                                            targetDirectory,
+                                            resourceName.Substring(bootstrapperPrefix.Length).Replace(@"version", thisAssemblyVersion));
+                                        using (var readStream = thisAssembly.GetManifestResourceStream(resourceName))
                                         {
-                                            writeStream.Write(buffer, 0, read);
+                                            if (null == readStream) { throw new InvalidOperationException("Unable to GetManifestResourceStream for one of Assembly.GetManifestResourceNames values"); }
+                                            using (var writeStream = File.Create(extractName, bufferSize))
+                                            {
+                                                int read;
+                                                while (0 != (read = readStream.Read(buffer, 0, bufferSize)))
+                                                {
+                                                    writeStream.Write(buffer, 0, read);
+                                                }
+                                            }
                                         }
                                     }
                                 }
                             }
 
-                            // and load the extracted file as assembly
+                            // load the target file as assembly
                             Bootstrapper._p4DnAssembly = Assembly.LoadFile(targetFileName);
                         }
                     }
@@ -156,7 +136,7 @@ namespace P4API
         }
 
 
-        private static volatile bool _initialized; // flag indicating whether we've already subscribed to this AppDomain's AssemblyResolve event
+        private static int _initialized; // flag indicating whether we've already subscribed to this AppDomain's AssemblyResolve event (1) or not (0)
         private static volatile Assembly _p4DnAssembly; // reference to the p4dn assembly for this process' architecture (set in the first resolve attempt; all subsequent attempts will use the cached reference)
         private static readonly object Sync = new object(); // used to serialize access to critical sections of code for multiple threads trying to resolve p4dn at the same time
 

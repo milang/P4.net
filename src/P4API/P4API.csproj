@@ -11,6 +11,7 @@
     <RootNamespace>P4API</RootNamespace>
     <AssemblyName>P4API</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AssemblyOriginatorKeyFile>..\p4.net.snk</AssemblyOriginatorKeyFile>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <OutputPath>..\..\bin\$(Configuration)</OutputPath>
@@ -67,16 +68,16 @@
     <Compile Include="Record\FieldDictionary.cs" />
     <None Include="ClassDiagram1.cd" />
     <EmbeddedResource Include="..\..\bin\$(Configuration)_Win32\p4dn.dll">
-      <Link>Bootstrapper.x86\p4dn.dll</Link>
+      <Link>Bootstrapper\version.x86\p4dn.dll</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\bin\$(Configuration)_Win32\p4dn.pdb">
-      <Link>Bootstrapper.x86\p4dn.pdb</Link>
+      <Link>Bootstrapper\version.x86\p4dn.pdb</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\bin\$(Configuration)_x64\p4dn.dll">
-      <Link>Bootstrapper.AMD64\p4dn.dll</Link>
+      <Link>Bootstrapper\version.AMD64\p4dn.dll</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\bin\$(Configuration)_x64\p4dn.pdb">
-      <Link>Bootstrapper.AMD64\p4dn.pdb</Link>
+      <Link>Bootstrapper\version.AMD64\p4dn.pdb</Link>
     </EmbeddedResource>
     <Content Include="CodeDocuments.xml" />
   </ItemGroup>

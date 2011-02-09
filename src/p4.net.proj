@@ -41,7 +41,9 @@
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=x64;TargetFrameworkVersion=v4.0" Targets="Build" />
         <Exec Command="&quot;@(Sn)&quot; -q -R p4dn.dll ../../src/p4.net.snk" WorkingDirectory="../bin/Release_v4.0_x64" />
         <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Debug;Platform=AnyCPU;TargetFrameworkVersion=v4.0" Targets="Build" />
+        <MSBuild Projects="P4API.Test/P4API.Test.csproj" Properties="Configuration=Debug;Platform=AnyCPU;TargetFrameworkVersion=v4.0" Targets="Build" />
         <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Release;Platform=AnyCPU;TargetFrameworkVersion=v4.0" Targets="Build" />
+        <MSBuild Projects="P4API.Test/P4API.Test.csproj" Properties="Configuration=Release;Platform=AnyCPU;TargetFrameworkVersion=v4.0" Targets="Build" />
         <!--
 
         Build CLR2 version -->
@@ -54,6 +56,8 @@
         <MSBuild Projects="p4dn/p4dn.vcxproj" Properties="Configuration=Release;Platform=x64;TargetFrameworkVersion=v2.0" Targets="Build" />
         <Exec Command="&quot;@(Sn)&quot; -q -R p4dn.dll ../../src/p4.net.snk" WorkingDirectory="../bin/Release_v2.0_x64" />
         <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Debug;Platform=AnyCPU;TargetFrameworkVersion=v2.0" Targets="Build" />
+        <MSBuild Projects="P4API.Test/P4API.Test.csproj" Properties="Configuration=Debug;Platform=AnyCPU;TargetFrameworkVersion=v2.0" Targets="Build" />
         <MSBuild Projects="P4API/P4API.csproj" Properties="Configuration=Release;Platform=AnyCPU;TargetFrameworkVersion=v2.0" Targets="Build" />
+        <MSBuild Projects="P4API.Test/P4API.Test.csproj" Properties="Configuration=Release;Platform=AnyCPU;TargetFrameworkVersion=v2.0" Targets="Build" />
     </Target>
 </Project>

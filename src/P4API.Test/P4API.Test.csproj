@@ -10,11 +10,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>P4API.Test</RootNamespace>
     <AssemblyName>P4API.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.0</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\p4.net.snk</AssemblyOriginatorKeyFile>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <OutputPath>..\..\bin\$(Configuration)</OutputPath>
-    <DocumentationFile>..\..\bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+    <OutputPath>..\..\bin\$(Configuration)_$(TargetFrameworkVersion)</OutputPath>
+    <DocumentationFile>..\..\bin\$(Configuration)_$(TargetFrameworkVersion)\$(AssemblyName).xml</DocumentationFile>
+
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,8 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\P4API\P4API.csproj">
       <Project>{4706B526-42F0-420E-9CF2-B0AB775C8E47}</Project>
       <Name>P4API</Name>

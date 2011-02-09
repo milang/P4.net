@@ -1,4 +1,6 @@
-﻿namespace P4API.Test
+﻿using System;
+
+namespace P4API.Test
 {
 
     /// <summary>
@@ -12,9 +14,20 @@
         {
             using (var c = new P4Connection())
             {
-                c.Connect();
+                try
+                {
+                    c.Connect();
+                }
+                catch (Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(ex.GetType().FullName);
+                    Console.Write(": ");
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                    Console.ResetColor();
+                }
             }
-
             return 0;
         }
 

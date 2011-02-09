@@ -112,7 +112,6 @@
     <ClCompile Include="Options_m.cpp" />
     <ClCompile Include="P4MapMaker.cpp" />
     <ClCompile Include="P4String.cpp" />
-    <ClCompile Include="SNAssemblyInfo.cpp" />
     <ClCompile Include="Spec_m.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

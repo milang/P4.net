@@ -92,9 +92,6 @@
     <ClCompile Include="P4String.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SNAssemblyInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Spec_m.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

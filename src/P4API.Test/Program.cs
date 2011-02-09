@@ -10,6 +10,14 @@ namespace P4API.Test
 
         /// <summary>
         /// </summary>
+        static Program()
+        {
+            P4API.Bootstrapper.Initialize();
+        }
+
+
+        /// <summary>
+        /// </summary>
         public static int Main(string[] args)
         {
             using (var c = new P4Connection())

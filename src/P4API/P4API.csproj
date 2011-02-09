@@ -10,13 +10,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>P4API</RootNamespace>
     <AssemblyName>P4API</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.0</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\p4.net.snk</AssemblyOriginatorKeyFile>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <OutputPath>..\..\bin\$(Configuration)</OutputPath>
-    <DocumentationFile>..\..\bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-    <ReferencePath>..\..\bin\Debug_Win32</ReferencePath>
+    <OutputPath>..\..\bin\$(Configuration)_$(TargetFrameworkVersion)</OutputPath>
+    <DocumentationFile>..\..\bin\$(Configuration)_$(TargetFrameworkVersion)\$(AssemblyName).xml</DocumentationFile>
+    <ReferencePath>..\..\bin\Debug_$(TargetFrameworkVersion)_Win32</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +29,9 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">CLR4;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,18 +70,27 @@
     <Compile Include="PrintStreamHelper.cs" />
     <Compile Include="Record\ArrayFieldDictionary.cs" />
     <Compile Include="Record\FieldDictionary.cs" />
+    <None Include="..\p4.net.snk">
+      <Link>p4.net.snk</Link>
+    </None>
     <None Include="ClassDiagram1.cd" />
-    <EmbeddedResource Include="..\..\bin\$(Configuration)_Win32\p4dn.dll">
-      <Link>Bootstrapper\version.x86\p4dn.dll</Link>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_Win32\p4dn.dll">
+      <Link>Bootstrapper\framework.build.version.x86\p4dn.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\bin\$(Configuration)_Win32\p4dn.pdb">
-      <Link>Bootstrapper\version.x86\p4dn.pdb</Link>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_Win32\p4dn.pdb">
+      <Link>Bootstrapper\framework.build.version.x86\p4dn.pdb</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\bin\$(Configuration)_x64\p4dn.dll">
-      <Link>Bootstrapper\version.AMD64\p4dn.dll</Link>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_x64\p4dn.dll">
+      <Link>Bootstrapper\framework.build.version.AMD64\p4dn.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\bin\$(Configuration)_x64\p4dn.pdb">
-      <Link>Bootstrapper\version.AMD64\p4dn.pdb</Link>
+    <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_x64\p4dn.pdb">
+      <Link>Bootstrapper\framework.build.version.AMD64\p4dn.pdb</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\lib\msvcr100\msvcr100.dll" Condition=" '$(Configuration)' == 'Release' ">
+      <Link>Bootstrapper\msvcr100.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\lib\msvcr100\msvcr100d.dll" Condition=" '$(Configuration)' == 'Debug' ">
+      <Link>Bootstrapper\msvcr100d.dll</Link>
     </EmbeddedResource>
     <Content Include="CodeDocuments.xml" />
   </ItemGroup>

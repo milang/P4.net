@@ -74,6 +74,10 @@ namespace P4API
                             var targetFileName = Path.Combine(
                                 targetDirectory,
                                 string.Concat(
+                                    ClrSpec,
+                                    ".",
+                                    BuildSpec,
+                                    ".",
                                     thisAssemblyVersion,
                                     ".",
                                     architecture,
@@ -100,7 +104,11 @@ namespace P4API
                                     {
                                         var extractName = Path.Combine(
                                             targetDirectory,
-                                            resourceName.Substring(bootstrapperPrefix.Length).Replace(@"version", thisAssemblyVersion));
+                                            resourceName
+                                                .Substring(bootstrapperPrefix.Length)
+                                                .Replace(@"framework", ClrSpec)
+                                                .Replace(@"build", BuildSpec)
+                                                .Replace(@"version", thisAssemblyVersion));
                                         using (var readStream = thisAssembly.GetManifestResourceStream(resourceName))
                                         {
                                             if (null == readStream) { throw new InvalidOperationException("Unable to GetManifestResourceStream for one of Assembly.GetManifestResourceNames values"); }
@@ -140,6 +148,21 @@ namespace P4API
         private static volatile Assembly _p4DnAssembly; // reference to the p4dn assembly for this process' architecture (set in the first resolve attempt; all subsequent attempts will use the cached reference)
         private static readonly object Sync = new object(); // used to serialize access to critical sections of code for multiple threads trying to resolve p4dn at the same time
 
+        private const string BuildSpec = (
+            #if DEBUG
+            @"debug"
+            #else
+            @"release"
+            #endif
+        );
+
+        private const string ClrSpec = (
+            #if CLR4
+            @"clr4"
+            #else
+            @"clr2"
+            #endif
+        );
     }
 
 }

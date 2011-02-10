@@ -1,7 +1,11 @@
 P4.NET
 ======
 
-P4.NET is a fork of the [original P4.NET component created by Shawn Hladky](http://p4dotnet.sourceforge.net/index.php/P4.Net_Overview), that provided managed implementation of Perforce API. While the original supported Microsoft .NET 1.1 and 2.0, this fork supports newer versions, namely .NET 2.0, 3.0, 3.5 (CLR 2) and 4.0 (CLR 4).
+P4.NET is a fork of the [original P4.NET component created by Shawn Hladky](http://p4dotnet.sourceforge.net/index.php/P4.Net_Overview). It provides managed implementation of Perforce API. Main features of this fork (as opposed to Shawn's original):
+
+- Support for CLR 2 (.NET 2.0, 3.0, 3.5)
+- Support for CLR 4 (.NET 4.0)
+- Single AnyCPU assembly (works in both 32 and 64 bit .NET runtimes)
 
 
 Overview

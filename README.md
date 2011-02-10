@@ -13,7 +13,7 @@ Overview
 
 Based on: [http://public.perforce.com:8080/guest/shawn_hladky/P4.Net/main/](http://public.perforce.com:8080/guest/shawn_hladky/P4.Net/main/)
 
-Current version: **2.0.0.1** (Feb 9, 2011; [sources](https://github.com/milang/P4.net/zipball/v2.0.0.1); [binaries](https://github.com/downloads/milang/P4.net/P4.NET_2.0.0.1.zip))
+Current version: **2.0.0.2** (Feb 9, 2011; [sources](https://github.com/milang/P4.net/zipball/v2.0.0.2); [binaries](https://github.com/downloads/milang/P4.net/P4.NET_2.0.0.2.zip))
 
 Build requirements: **Visual C++ 2010** (free edition should have no problems)
 

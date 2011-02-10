@@ -29,11 +29,10 @@ using namespace System::Runtime::CompilerServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly:AssemblyTitleAttribute("p4dn")];
-[assembly:AssemblyDescriptionAttribute("p4dn")];
+[assembly:AssemblyTitleAttribute("P4.Net p4dn")];
+[assembly:AssemblyDescriptionAttribute("P4.Net p4dn")];
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
-[assembly:AssemblyProductAttribute("P4.Net")];
 [assembly:AssemblyCopyrightAttribute("Copyright (c) 2007-2011 Shawn Hladky")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
@@ -50,7 +49,8 @@ using namespace System::Runtime::CompilerServices;
 // by using the '*' as shown below:
 
 [assembly:AssemblyVersionAttribute("2.0.0.0")];
-[assembly:AssemblyFileVersionAttribute("2.0.0.1")];
+[assembly:AssemblyFileVersionAttribute("2.0.0.2")];
+[assembly:AssemblyProductAttribute("P4.Net v2.0.0")];
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the

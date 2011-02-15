@@ -86,12 +86,6 @@
     <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_x64\p4dn.pdb">
       <Link>Bootstrapper\framework.build.version.x64\p4dn.pdb</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\lib\msvcr100\msvcr100.dll" Condition=" '$(Configuration)' == 'Release' ">
-      <Link>Bootstrapper\msvcr100.dll</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\lib\msvcr100\msvcr100d.dll" Condition=" '$(Configuration)' == 'Debug' ">
-      <Link>Bootstrapper\msvcr100d.dll</Link>
-    </EmbeddedResource>
     <Content Include="CodeDocuments.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

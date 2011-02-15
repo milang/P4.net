@@ -49,7 +49,7 @@ using namespace System::Runtime::CompilerServices;
 // by using the '*' as shown below:
 
 [assembly:AssemblyVersionAttribute("2.0.0.0")];
-[assembly:AssemblyFileVersionAttribute("2.0.0.2")];
+[assembly:AssemblyFileVersionAttribute("2.0.0.3")];
 [assembly:AssemblyProductAttribute("P4.Net v2.0.0")];
 
 //

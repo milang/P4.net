@@ -68,7 +68,7 @@ namespace P4API
                                 Path.Combine(
                                     "Perforce",
                                     "P4.NET"));
-                            var architecture = (Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") ?? "x86").ToLowerInvariant();
+                            var architecture = (IntPtr.Size == 4 ? "x86" : "x64").ToLowerInvariant();
                             var thisAssembly = typeof(Bootstrapper).Assembly;
                             var thisAssemblyFileVersion = FileVersionInfo.GetVersionInfo(thisAssembly.Location).FileVersion;
                             var targetFileName = Path.Combine(

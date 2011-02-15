@@ -81,10 +81,10 @@
       <Link>Bootstrapper\framework.build.version.x86\p4dn.pdb</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_x64\p4dn.dll">
-      <Link>Bootstrapper\framework.build.version.AMD64\p4dn.dll</Link>
+      <Link>Bootstrapper\framework.build.version.x64\p4dn.dll</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\bin\$(Configuration)_$(TargetFrameworkVersion)_x64\p4dn.pdb">
-      <Link>Bootstrapper\framework.build.version.AMD64\p4dn.pdb</Link>
+      <Link>Bootstrapper\framework.build.version.x64\p4dn.pdb</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\lib\msvcr100\msvcr100.dll" Condition=" '$(Configuration)' == 'Release' ">
       <Link>Bootstrapper\msvcr100.dll</Link>

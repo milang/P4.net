@@ -29,3 +29,12 @@ How to build
   - `bin/Release_v2.0/P4API.dll (pdb, xml)` - signed P4.NET assembly in release mode, compiled for .NET 2.0 (i.e. usable from .NET 2.0, 3.0 and 3.5)
   - `bin/Debug_v4.0/P4API.dll (pdb, xml)` - signed P4.NET assembly in debug mode, compiled for .NET 4.0
   - `bin/Release_v4.0/P4API.dll (pdb, xml)` - signed P4.NET assembly in release mode, compiled for .NET 4.0
+
+
+**Note**: It is not possible to compile the C++ component of P4.NET (mixed-mode assembly p4dn, embedded in assembly p4api) with statically linked runtime libraries. This means that `p4dn.dll` has dependency on `msvcrt100.dll` (or `msvcrt100d.dll` in debug build). Because different versions of runtime DLLs are needed for different process bitness (when running on a 64 bit operating system, a .NET process can run in 32 bit mode where a 32 bit p4dn will be loaded that will require 32 bit msvcrt100.dll, while another .NET process can run in 64 bit mode where a 64 bit p4dn will be loaded that will require 64 bit msvcrt100.dll).
+
+Installing Visual C++ 2010 runtime on the machine that will be using P4.NET component is the easiest way to solve this problem (if another program already installed the runtime, no action is needed)
+
+- [Download installer for 32-bit Windows](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=a7b7a05e-6de6-4d3a-a423-37bf0912db84)
+
+- [Download installer for 64-bit Windows](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=BD512D9E-43C8-4655-81BF-9350143D5867)

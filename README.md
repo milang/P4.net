@@ -13,7 +13,7 @@ Overview
 
 Based on: [http://public.perforce.com:8080/guest/shawn_hladky/P4.Net/main/](http://public.perforce.com:8080/guest/shawn_hladky/P4.Net/main/)
 
-Current version: **2.0.0.2** (Feb 9, 2011; [sources](https://github.com/milang/P4.net/zipball/v2.0.0.2); [binaries](https://github.com/downloads/milang/P4.net/P4.NET_2.0.0.2.zip))
+Current version: **2.0.0.3** (Feb 15, 2011; [sources](https://github.com/milang/P4.net/zipball/v2.0.0.3); [binaries](https://github.com/downloads/milang/P4.net/P4.Net_2.0.0.3.zip))
 
 Build requirements: **Visual C++ 2010** (free edition should have no problems)
 
@@ -35,6 +35,6 @@ How to build
 
 Installing Visual C++ 2010 runtime is the easiest way to solve this problem (if another program already installed the runtime, no action is needed) :
 
-- [Download runtime installer for 32-bit Windows](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=a7b7a05e-6de6-4d3a-a423-37bf0912db84)
+- [Download runtime installer for 32-bit (x86) Windows](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=a7b7a05e-6de6-4d3a-a423-37bf0912db84)
 
-- [Download runtime installer for 64-bit Windows](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=BD512D9E-43C8-4655-81BF-9350143D5867)
+- [Download runtime installer for 64-bit (x64) Windows](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=BD512D9E-43C8-4655-81BF-9350143D5867)
